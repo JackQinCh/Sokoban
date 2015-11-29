@@ -13,11 +13,16 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -86,9 +91,18 @@ public class GameController {
 	
 	currentStage = 0;
 	initGame();
+	URL imgURL = getClass().getResource("R/images/Congratulations.png");
+	try{
+	    congratulationsImage = ImageIO.read(imgURL);
+	} catch (IOException e) {
+	    e.printStackTrace();
+	}
     }
 
     private void initGame() {
+	isPlaying = true;
+	isFinished = false;
+	
 	for (int i = 0; i < MAPSIZE; i++) {
 	    for (int j = 0; j < MAPSIZE; j++) {
 		map[i][j] = stages[currentStage][i][j];
@@ -96,6 +110,7 @@ public class GameController {
 	}
 	box.clear();
 	targets.clear();
+	
 	
 	for (int i = 0; i < MAPSIZE; i++) {
 	    for (int j = 0; j < MAPSIZE; j++) {
@@ -140,6 +155,7 @@ public class GameController {
 	    }
 	}
 	System.out.println("Player X:"+player.x+", Y:"+player.y);
+	isPlaying = false;
     }
     
     public void draw(Graphics2D g2d){
@@ -168,6 +184,10 @@ public class GameController {
 	    g2d.drawImage(b.image, b.dX, b.dY, b.getWide(), b.getHeigh(), null);
 	}
 	g2d.drawImage(player.image, player.dX, player.dY, player.getWide(), player.getHeigh(), null);
+	
+	if (isFinished) {
+	    g2d.drawImage(congratulationsImage, 0, 50, 330, 200, null);
+	}
     }
     
     private boolean isPlaying = false;
@@ -211,10 +231,46 @@ public class GameController {
 		    item.y = item.tmpY;
 		    isPlaying = false;
 		    cancel();
+		    if (item == player) {
+			checkFinish();
+		    }
 		}
 	    }
 	}, 0, spanT);
     }
+    private Image congratulationsImage;
+    private boolean isFinished = false;
+    private void checkFinish(){
+	int boxnum = 0;
+	int targetnum = 0;
+	for (int i = 0; i < MAPSIZE; i++) {
+	    for (int j = 0; j < MAPSIZE; j++) {
+		if (map[i][j] == BOX) {
+		    boxnum++;
+		}else if (map[i][j] == TARGET) {
+		    targetnum ++;
+		}
+	    }
+	}
+	if (boxnum == 0 && targetnum == 0) {
+	    finishedGame();
+	}
+    }
+    
+    private void finishedGame() {
+	isFinished = true;
+	
+	Timer timer = new Timer();
+	timer.schedule(new TimerTask() {
+	    @Override
+	    public void run() {
+		System.out.println(".run()");
+		cancel();
+		nextStage();
+	    }
+	}, 2000);
+    }
+    
     private void stopAnimation(){
 	if (timer != null) {
 	    timer.cancel();
@@ -222,7 +278,7 @@ public class GameController {
     }
     
     public void move(int direction){
-	if (isPlaying) {
+	if (isPlaying || isFinished) {
 	    return;
 	}
 	int newX;
@@ -310,6 +366,9 @@ public class GameController {
 	if (currentStage+1 < stages.length) {
 	    currentStage ++;
 	    newGame();
-	}
+	}else
+	    newGame();
     }
+
+    
 }
