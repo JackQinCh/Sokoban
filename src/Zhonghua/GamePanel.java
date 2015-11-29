@@ -42,6 +42,10 @@ public class GamePanel extends JPanel {
 	controller.newGame();
     }
 
+    void nextStage() {
+	controller.nextStage();
+    }
+
     
     class DisplayThread extends Thread{
 	@Override

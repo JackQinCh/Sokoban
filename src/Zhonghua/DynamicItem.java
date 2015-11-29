@@ -18,6 +18,8 @@ public class DynamicItem {
     Image image;
     int x;
     int y;
+    int tmpX;
+    int tmpY;
     int dX;
     int dY;
     private int wide;
@@ -35,6 +37,8 @@ public class DynamicItem {
 	this.image = image;
 	this.x = x;
 	this.y = y;
+	this.tmpX = x;
+	this.tmpY = y;
 	this.dX = dX;
 	this.dY = dY;
 	this.wide = wide;

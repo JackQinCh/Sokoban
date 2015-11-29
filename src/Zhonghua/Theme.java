@@ -27,6 +27,7 @@ public class Theme {
     private List<Image> wallImages = new ArrayList<>();
     private List<Image> floorImages = new ArrayList<>();
     private List<Image> boxImages = new ArrayList<>();
+    private List<Image> boxCompletedImages = new ArrayList<>();
     private List<Image> targetImages = new ArrayList<>();
 
     public List<Image> getWallImages() {
@@ -39,6 +40,9 @@ public class Theme {
 
     public List<Image> getBoxImages() {
 	return boxImages;
+    }
+    public List<Image> getBoxCompletedImages() {
+	return boxCompletedImages;
     }
 
     public List<Image> getTargetImages() {
@@ -74,9 +78,15 @@ public class Theme {
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
-	imgURL = getClass().getResource("R/images/Crate_Blue.png");
+	imgURL = getClass().getResource("R/images/Crate_Beige.png");
 	try{
 	    boxImages.add(ImageIO.read(imgURL));
+	} catch (IOException e) {
+	    e.printStackTrace();
+	}
+	imgURL = getClass().getResource("R/images/Crate_Blue.png");
+	try{
+	    boxCompletedImages.add(ImageIO.read(imgURL));
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
