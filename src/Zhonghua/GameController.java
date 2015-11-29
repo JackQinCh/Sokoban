@@ -44,17 +44,17 @@ public class GameController {
         {9, 9, 9, 9, 9, 9},
         {9, 1, 1, 1, 1, 1},
         {1, 1, 0, 0, 0, 1},
-        {1, 2, 4, 3, 0, 1},
+        {1, 6, 3, 0, 0, 1},
         {1, 1, 1, 1, 1, 1},
         {9, 9, 9, 9, 9, 9}
     };
     private final int[][] stage2 = {
         {9, 9, 9, 9, 9, 9},
-        {9, 1, 1, 1, 1, 1},
-        {1, 1, 0, 0, 0, 1},
-        {1, 2, 4, 3, 0, 1},
         {1, 1, 1, 1, 1, 1},
-        {9, 9, 9, 9, 9, 9}
+        {1, 5, 5, 2, 2, 1},
+        {1, 0, 3, 3, 5, 1},
+        {1, 4, 0, 0, 0, 1},
+        {1, 1, 1, 1, 1, 1}
     };
     private final int[][] stage3 = {
         {9, 9, 9, 9, 9, 9},
@@ -94,6 +94,8 @@ public class GameController {
 		map[i][j] = stages[currentStage][i][j];
 	    }
 	}
+	box.clear();
+	targets.clear();
 	
 	for (int i = 0; i < MAPSIZE; i++) {
 	    for (int j = 0; j < MAPSIZE; j++) {
@@ -126,7 +128,7 @@ public class GameController {
 				i*BLOCK+(BLOCK-TARGET_W)/2, TARGET_W, TARGET_W));
 			break;
 		    case BOX+TARGET:
-			box.add(new DynamicItem(theme.getBoxImages().get(0), j, i, j*BLOCK, i*BLOCK, BLOCK, BLOCK));
+			box.add(new DynamicItem(theme.getBoxCompletedImages().get(0), j, i, j*BLOCK, i*BLOCK, BLOCK, BLOCK));
 			targets.add(new DynamicItem(theme.getTargetImages().get(0),
 				j, i,
 				j*BLOCK+(BLOCK-TARGET_W)/2, 
@@ -158,6 +160,11 @@ public class GameController {
 	    g2d.drawImage(target.image, target.dX, target.dY, target.getWide(), target.getHeigh(), null);
 	}
 	for (DynamicItem b : box) {
+	    if (map[b.y][b.x] == TARGET+BOX) {
+		b.image = theme.getBoxCompletedImages().get(0);
+	    }else if (map[b.y][b.x] == BOX){
+		b.image = theme.getBoxImages().get(0);
+	    }
 	    g2d.drawImage(b.image, b.dX, b.dY, b.getWide(), b.getHeigh(), null);
 	}
 	g2d.drawImage(player.image, player.dX, player.dY, player.getWide(), player.getHeigh(), null);
@@ -200,6 +207,8 @@ public class GameController {
 		item.dY = startY + (int)(spanY*n);
 		n++;
 		if (n == allFrames.size()) {
+		    item.x = item.tmpX;
+		    item.y = item.tmpY;
 		    isPlaying = false;
 		    cancel();
 		}
@@ -263,9 +272,10 @@ public class GameController {
 	    //Move
 	    playAnimation(player, framesImages, 
 		    new Point((newX - player.x)*BLOCK, (newY - player.y)*BLOCK), 2, 1000);
-	    player.x = newX;
-            player.y = newY;
-        }else if(map[newY][newX] == BOX){
+	    player.tmpX = newX;
+            player.tmpY = newY;
+	    System.out.println("Player X:"+player.x+", Y:"+player.y);
+        }else if(map[newY][newX] == BOX || map[newY][newX] == BOX+TARGET){
 	    DynamicItem boxT = null;
 	    for (DynamicItem b : box) {
 		if (b.x == newX && b.y == newY) {
@@ -279,12 +289,14 @@ public class GameController {
 		//Move
 		playAnimation(boxT, theme.getBoxImages(), 
 		    new Point((crossX - boxT.x)*BLOCK, (crossY - boxT.y)*BLOCK), 5*2, 1000);
-		boxT.x = crossX;
-		boxT.y = crossY;
+		boxT.tmpX = crossX;
+		boxT.tmpY = crossY;
 		playAnimation(player, framesImages, 
 		    new Point((newX - player.x)*BLOCK, (newY - player.y)*BLOCK), 2, 1000);
-                player.x = newX;
-                player.y = newY;
+                player.tmpX = newX;
+                player.tmpY = newY;
+		System.out.println("Player X:"+player.x+", Y:"+player.y);
+		System.out.println("Box X:"+boxT.x+", Y:"+boxT.y);
             }
         }
     }
@@ -292,5 +304,12 @@ public class GameController {
     protected void newGame(){
 	stopAnimation();
 	initGame();
+    }
+
+    void nextStage() {
+	if (currentStage+1 < stages.length) {
+	    currentStage ++;
+	    newGame();
+	}
     }
 }
