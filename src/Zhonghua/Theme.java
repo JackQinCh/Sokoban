@@ -20,6 +20,7 @@ import javax.imageio.ImageIO;
  * @author Zhonghua Qin
  */
 public class Theme {
+    private final String name = "Default theme";
     private List<Image> playerUpImages = new ArrayList<>();
     private List<Image> playerDownImages = new ArrayList<>();
     private List<Image> playerLeftImages = new ArrayList<>();
@@ -29,6 +30,10 @@ public class Theme {
     private List<Image> boxImages = new ArrayList<>();
     private List<Image> boxCompletedImages = new ArrayList<>();
     private List<Image> targetImages = new ArrayList<>();
+
+    public String getName() {
+	return name;
+    }
 
     public List<Image> getWallImages() {
 	return wallImages;

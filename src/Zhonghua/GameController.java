@@ -45,37 +45,6 @@ public class GameController {
     protected static final int PLAYER_H = BLOCK;
     protected static final int TARGET_W = BLOCK * 2/3;
     
-    private final int[][] stage1 = {
-        {9, 9, 9, 9, 9, 9},
-        {9, 1, 1, 1, 1, 1},
-        {1, 1, 0, 0, 0, 1},
-        {1, 6, 3, 0, 0, 1},
-        {1, 1, 1, 1, 1, 1},
-        {9, 9, 9, 9, 9, 9}
-    };
-    private final int[][] stage2 = {
-        {9, 9, 9, 9, 9, 9},
-        {1, 1, 1, 1, 1, 1},
-        {1, 5, 5, 2, 2, 1},
-        {1, 0, 3, 3, 5, 1},
-        {1, 4, 0, 0, 0, 1},
-        {1, 1, 1, 1, 1, 1}
-    };
-    private final int[][] stage3 = {
-        {9, 9, 9, 9, 9, 9},
-        {9, 1, 1, 1, 1, 1},
-        {1, 1, 0, 0, 0, 1},
-        {1, 2, 4, 3, 0, 1},
-        {1, 1, 1, 1, 1, 1},
-        {9, 9, 9, 9, 9, 9}
-    };
-    
-    private int [][][] stages = {
-	stage1,
-	stage2,
-	stage3
-    };
-    
     protected int [][] map = new int[MAPSIZE][MAPSIZE];
     private int currentStage;
     protected List<DynamicItem> box = new LinkedList();
@@ -105,7 +74,7 @@ public class GameController {
 	
 	for (int i = 0; i < MAPSIZE; i++) {
 	    for (int j = 0; j < MAPSIZE; j++) {
-		map[i][j] = stages[currentStage][i][j];
+		map[i][j] = StageFactory.getStages()[currentStage][i][j];
 	    }
 	}
 	box.clear();
@@ -363,8 +332,16 @@ public class GameController {
     }
 
     void nextStage() {
-	if (currentStage+1 < stages.length) {
+	if (currentStage+1 < StageFactory.getStages().length) {
 	    currentStage ++;
+	    newGame();
+	}else
+	    newGame();
+    }
+
+    void backStage() {
+	if (currentStage > 0) {
+	    currentStage --;
 	    newGame();
 	}else
 	    newGame();
