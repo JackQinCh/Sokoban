@@ -41,6 +41,10 @@ public class GamePanel extends JPanel {
         
     }
 
+    public GameController getController() {
+	return controller;
+    }
+
     public void keyPressed(KeyEvent e) {
 	controller.move(e.getKeyCode());
     }
@@ -55,6 +59,10 @@ public class GamePanel extends JPanel {
 
     void backStage() {
 	controller.backStage();
+    }
+
+    void setStage(int n) {
+	controller.setStage(n);
     }
     
     class DisplayThread extends Thread{

@@ -158,6 +158,10 @@ public class GameController {
 	    g2d.drawImage(congratulationsImage, 0, 50, 330, 200, null);
 	}
     }
+
+    public int getCurrentStage() {
+	return currentStage;
+    }
     
     private boolean isPlaying = false;
     private Timer timer;
@@ -345,6 +349,11 @@ public class GameController {
 	    newGame();
 	}else
 	    newGame();
+    }
+
+    void setStage(int n) {
+	currentStage = n-1;
+	newGame();
     }
 
     
