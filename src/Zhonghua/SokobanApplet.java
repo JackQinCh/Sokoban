@@ -53,18 +53,18 @@ public class SokobanApplet extends JApplet implements KeyListener{
     private JMenuBar initMenu(){
 	JMenuBar menu = new JMenuBar();
 	
-	JMenu menuFile = new JMenu("File");
-	JMenuItem saveItem = new JMenuItem("Save");
-	saveItem.addActionListener((ActionEvent e) -> {
-	    gamePanel.saveGame();
-	});
-	JMenuItem loadItem = new JMenuItem("Load");
-	loadItem.addActionListener((ActionEvent e) -> {
-	    gamePanel.loadGame();
-	});
-	menuFile.add(saveItem);
-	menuFile.add(loadItem);
-	menu.add(menuFile);
+//	JMenu menuFile = new JMenu("File");
+//	JMenuItem saveItem = new JMenuItem("Save");
+//	saveItem.addActionListener((ActionEvent e) -> {
+//	    gamePanel.saveGame();
+//	});
+//	JMenuItem loadItem = new JMenuItem("Load");
+//	loadItem.addActionListener((ActionEvent e) -> {
+//	    gamePanel.loadGame();
+//	});
+//	menuFile.add(saveItem);
+//	menuFile.add(loadItem);
+//	menu.add(menuFile);
 	
         JMenu menuCommand = new JMenu("Command");
         JMenuItem newGameItem = new JMenuItem("New Game");
