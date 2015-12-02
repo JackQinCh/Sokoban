@@ -56,6 +56,14 @@ public class GamePanel extends JPanel {
     void setStage(int n) {
 	controller.setStage(n);
     }
+
+    void saveGame() {
+	controller.saveGame();
+    }
+
+    void loadGame() {
+	controller.loadGame();
+    }
     
     class DisplayThread extends Thread{
 	@Override

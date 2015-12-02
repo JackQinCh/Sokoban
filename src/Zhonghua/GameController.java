@@ -57,7 +57,7 @@ public class GameController {
 	theme = new Theme();
 	
 	currentStage = 0;
-	initGame();
+	initGame(true);
 	URL imgURL = getClass().getResource("R/images/Congratulations.png");
 	try{
 	    congratulationsImage = ImageIO.read(imgURL);
@@ -66,13 +66,15 @@ public class GameController {
 	}
     }
 
-    private void initGame() {
+    private void initGame(boolean withStage) {
 	isPlaying = true;
 	isFinished = false;
 	
-	for (int i = 0; i < MAPSIZE; i++) {
-	    for (int j = 0; j < MAPSIZE; j++) {
-		map[i][j] = StageFactory.getStages()[currentStage][i][j];
+	if (withStage) {
+	    for (int i = 0; i < MAPSIZE; i++) {
+		for (int j = 0; j < MAPSIZE; j++) {
+		    map[i][j] = StageFactory.getStages()[currentStage][i][j];
+		}
 	    }
 	}
 	box.clear();
@@ -330,7 +332,7 @@ public class GameController {
     
     protected void newGame(){
 	stopAnimation();
-	initGame();
+	initGame(true);
     }
 
     void nextStage() {
@@ -354,5 +356,24 @@ public class GameController {
 	newGame();
     }
 
+    void saveGame() {
+	SQLManager.save(map);
+    }
+
+    void loadGame() {
+	
+	int[][] loadMap = SQLManager.load();
+	if (loadMap != null) {
+	    stopAnimation();
+	    isPlaying = true;
+	    isFinished = false;
+	    for (int i = 0; i < MAPSIZE; i++) {
+		for (int j = 0; j < MAPSIZE; j++) {
+		    map[i][j] = loadMap[i][j];
+		}
+	    }
+	    initGame(false);
+	}
+    }
     
 }

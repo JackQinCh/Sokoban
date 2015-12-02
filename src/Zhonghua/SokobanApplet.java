@@ -9,6 +9,9 @@
 package Zhonghua;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -49,6 +52,19 @@ public class SokobanApplet extends JApplet implements KeyListener{
     
     private JMenuBar initMenu(){
 	JMenuBar menu = new JMenuBar();
+	
+	JMenu menuFile = new JMenu("File");
+	JMenuItem saveItem = new JMenuItem("Save");
+	saveItem.addActionListener((ActionEvent e) -> {
+	    gamePanel.saveGame();
+	});
+	JMenuItem loadItem = new JMenuItem("Load");
+	loadItem.addActionListener((ActionEvent e) -> {
+	    gamePanel.loadGame();
+	});
+	menuFile.add(saveItem);
+	menuFile.add(loadItem);
+	menu.add(menuFile);
 	
         JMenu menuCommand = new JMenu("Command");
         JMenuItem newGameItem = new JMenuItem("New Game");
@@ -91,7 +107,7 @@ public class SokobanApplet extends JApplet implements KeyListener{
 	
 	return menu;
     }
-
+    
     @Override
     public void keyTyped(KeyEvent e) {
     }
