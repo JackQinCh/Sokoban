@@ -147,7 +147,7 @@ public class GameFrame extends javax.swing.JFrame {
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
-	String s = JOptionPane.showInputDialog("Input Row",((GamePanel)gamePanel).getController().getCurrentStage()+1);
+	String s = JOptionPane.showInputDialog("Input Stage",((GamePanel)gamePanel).getController().getCurrentStage()+1);
 	System.out.println(s);
 	try{
 	    int n = Integer.parseInt(s);
