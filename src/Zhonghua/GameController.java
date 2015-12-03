@@ -9,6 +9,8 @@
 package Zhonghua;
 
 import static Zhonghua.Theme.Themes.*;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
@@ -154,6 +156,10 @@ public class GameController {
 	    g2d.drawImage(b.image, b.dX, b.dY, b.getWide(), b.getHeigh(), null);
 	}
 	g2d.drawImage(player.image, player.dX, player.dY, player.getWide(), player.getHeigh(), null);
+	
+	g2d.setFont(new Font("Arial", Font.BOLD, 30));
+	g2d.setColor(Color.white);
+	g2d.drawString(String.valueOf(currentStage+1), 15, 30);
 	
 	if (isFinished) {
 	    g2d.drawImage(congratulationsImage, 0, 50, 330, 200, null);
