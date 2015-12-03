@@ -8,6 +8,7 @@
  */
 package Zhonghua;
 
+import static Zhonghua.Theme.Themes.*;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
@@ -54,7 +55,7 @@ public class GameController {
     public GameController(GamePanel gamePanel) {
 	this.gamePanel = gamePanel;
 	
-	theme = new Theme();
+	theme = Theme.newTheme(0);
 	
 	currentStage = 0;
 	initGame(true);
@@ -142,7 +143,7 @@ public class GameController {
 	
 	//Dynamic items
 	for (DynamicItem target : targets) {
-	    g2d.drawImage(target.image, target.dX, target.dY, target.getWide(), target.getHeigh(), null);
+	    g2d.drawImage(theme.getTargetImages().get(0), target.dX, target.dY, target.getWide(), target.getHeigh(), null);
 	}
 	for (DynamicItem b : box) {
 	    if (map[b.y][b.x] == TARGET+BOX) {
@@ -374,6 +375,10 @@ public class GameController {
 	    }
 	    initGame(false);
 	}
+    }
+
+    void setTheme(int t) {
+	theme = Theme.newTheme(t);
     }
     
 }

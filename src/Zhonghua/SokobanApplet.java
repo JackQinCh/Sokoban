@@ -52,20 +52,7 @@ public class SokobanApplet extends JApplet implements KeyListener{
     
     private JMenuBar initMenu(){
 	JMenuBar menu = new JMenuBar();
-	
-//	JMenu menuFile = new JMenu("File");
-//	JMenuItem saveItem = new JMenuItem("Save");
-//	saveItem.addActionListener((ActionEvent e) -> {
-//	    gamePanel.saveGame();
-//	});
-//	JMenuItem loadItem = new JMenuItem("Load");
-//	loadItem.addActionListener((ActionEvent e) -> {
-//	    gamePanel.loadGame();
-//	});
-//	menuFile.add(saveItem);
-//	menuFile.add(loadItem);
-//	menu.add(menuFile);
-	
+		
         JMenu menuCommand = new JMenu("Command");
         JMenuItem newGameItem = new JMenuItem("New Game");
 	newGameItem.addActionListener((ActionEvent e) -> {
@@ -102,8 +89,26 @@ public class SokobanApplet extends JApplet implements KeyListener{
 	});
 	menuStage.add(selectStageItem);
 	
+	JMenu menuTheme = new JMenu("Themes");
+	int numOfThemes = Theme.themes.length;
+	ActionListener listener = new ActionListener() {
+	    @Override
+	    public void actionPerformed(ActionEvent e) {
+		String command = e.getActionCommand();
+		((GamePanel)gamePanel).setTheme(Integer.valueOf(command));
+	    }
+	};
+	
+	for (int i = 0; i < numOfThemes; i++) {
+	    JMenuItem item = new JMenuItem(Theme.themes[i].getName());
+	    item.setActionCommand(String.valueOf(i));
+	    item.addActionListener(listener);
+	    menuTheme.add(item);
+	}
+	
 	menu.add(menuCommand);
 	menu.add(menuStage);
+	menu.add(menuTheme);
 	
 	return menu;
     }

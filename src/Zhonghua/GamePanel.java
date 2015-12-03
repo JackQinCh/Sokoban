@@ -64,6 +64,10 @@ public class GamePanel extends JPanel {
     void loadGame() {
 	controller.loadGame();
     }
+
+    void setTheme(int theme) {
+	controller.setTheme(theme);
+    }
     
     class DisplayThread extends Thread{
 	@Override

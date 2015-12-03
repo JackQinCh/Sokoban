@@ -8,8 +8,11 @@
  */
 package Zhonghua;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,6 +26,21 @@ public class GameFrame extends javax.swing.JFrame {
      */
     public GameFrame() {
         initComponents();
+	int numOfThemes = Theme.themes.length;
+	ActionListener listener = new ActionListener() {
+	    @Override
+	    public void actionPerformed(ActionEvent e) {
+		String command = e.getActionCommand();
+		((GamePanel)gamePanel).setTheme(Integer.valueOf(command));
+	    }
+	};
+	
+	for (int i = 0; i < numOfThemes; i++) {
+	    JMenuItem item = new JMenuItem(Theme.themes[i].getName());
+	    item.setActionCommand(String.valueOf(i));
+	    item.addActionListener(listener);
+	    themeMenu.add(item);
+	}
     }
 
     /**
@@ -43,6 +61,7 @@ public class GameFrame extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
+        themeMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sokoban_ZhonghuaQin");
@@ -132,6 +151,9 @@ public class GameFrame extends javax.swing.JFrame {
         jMenu2.add(jMenuItem4);
 
         jMenuBar1.add(jMenu2);
+
+        themeMenu.setText("Themes");
+        jMenuBar1.add(themeMenu);
 
         setJMenuBar(jMenuBar1);
 
@@ -244,5 +266,6 @@ public class GameFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenu themeMenu;
     // End of variables declaration//GEN-END:variables
 }

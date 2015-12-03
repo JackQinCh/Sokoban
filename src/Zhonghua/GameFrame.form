@@ -88,6 +88,11 @@
             </MenuItem>
           </SubComponents>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="themeMenu">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Themes"/>
+          </Properties>
+        </Menu>
       </SubComponents>
     </Menu>
   </NonVisualComponents>

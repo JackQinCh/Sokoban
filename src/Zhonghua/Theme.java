@@ -20,17 +20,30 @@ import javax.imageio.ImageIO;
  * @author Zhonghua Qin
  */
 public class Theme {
-    private final String name = "Default theme";
-    private List<Image> playerUpImages = new ArrayList<>();
-    private List<Image> playerDownImages = new ArrayList<>();
-    private List<Image> playerLeftImages = new ArrayList<>();
-    private List<Image> playerRightImages = new ArrayList<>();
-    private List<Image> wallImages = new ArrayList<>();
-    private List<Image> floorImages = new ArrayList<>();
-    private List<Image> boxImages = new ArrayList<>();
-    private List<Image> boxCompletedImages = new ArrayList<>();
-    private List<Image> targetImages = new ArrayList<>();
-
+    protected String name = "Default theme";
+    protected List<Image> playerUpImages = new ArrayList<>();
+    protected List<Image> playerDownImages = new ArrayList<>();
+    protected List<Image> playerLeftImages = new ArrayList<>();
+    protected List<Image> playerRightImages = new ArrayList<>();
+    protected List<Image> wallImages = new ArrayList<>();
+    protected List<Image> floorImages = new ArrayList<>();
+    protected List<Image> boxImages = new ArrayList<>();
+    protected List<Image> boxCompletedImages = new ArrayList<>();
+    protected List<Image> targetImages = new ArrayList<>();
+    
+    public static final Theme[] themes = {
+	new Theme(),
+	new SnowTheme()
+    };
+    
+    static enum Themes{
+	DEFAULT
+    }
+    
+    public static Theme newTheme(int t){
+	return themes[t];
+    }
+    
     public String getName() {
 	return name;
     }
@@ -70,7 +83,13 @@ public class Theme {
 	return playerRightImages;
     }
 
-    public Theme() {
+    protected Theme() {
+	initItems();
+	initPlayer();
+	
+    }
+
+    protected void initItems() {
 	URL imgURL = getClass().getResource("R/images/Wall_Brown.png");
 	try{
 	    wallImages.add(ImageIO.read(imgURL));
@@ -101,6 +120,10 @@ public class Theme {
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
+    }
+
+    protected void initPlayer() {
+	URL imgURL;
 	//Player Up
 	imgURL = getClass().getResource("R/images/Character7.png");
 	try{
@@ -225,6 +248,5 @@ public class Theme {
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
-	
     }
 }
