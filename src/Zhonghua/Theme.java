@@ -20,7 +20,7 @@ import javax.imageio.ImageIO;
  * @author Zhonghua Qin
  */
 public class Theme {
-    protected String name = "Default theme";
+    protected String name = "Default";
     protected List<Image> playerUpImages = new ArrayList<>();
     protected List<Image> playerDownImages = new ArrayList<>();
     protected List<Image> playerLeftImages = new ArrayList<>();
@@ -33,7 +33,9 @@ public class Theme {
     
     public static final Theme[] themes = {
 	new Theme(),
-	new SnowTheme()
+	new SnowTheme(),
+	new CastleTheme(),
+	new GreenTheme()
     };
     
     static enum Themes{
