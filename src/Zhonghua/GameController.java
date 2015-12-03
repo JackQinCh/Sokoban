@@ -8,7 +8,6 @@
  */
 package Zhonghua;
 
-import static Zhonghua.Theme.Themes.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -173,6 +172,8 @@ public class GameController {
     private boolean isPlaying = false;
     private Timer timer;
     private void playAnimation(DynamicItem item, List<Image> frames, Point distancePoint, int cycle, int time){
+	if(item == null || frames.size() == 0)
+	    return;
 	isPlaying = true;
 	timer = new Timer();
 	
