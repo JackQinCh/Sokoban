@@ -35,23 +35,76 @@ public class GameController {
     
     GamePanel gamePanel;
     
+    /**
+     * Floor index
+     */
     protected static final int FLOOR = 0;
+
+    /**
+     * Wall index
+     */
     protected static final int WALL = 1;
+
+    /**
+     * Target index
+     */
     protected static final int TARGET = 2;
+
+    /**
+     * Box index
+     */
     protected static final int BOX = 3;
+
+    /**
+     * Player index
+     */
     protected static final int PLAYER = 4;
+
+    /**
+     * Outside index
+     */
     protected static final int OUTSIDE = 9;
     
+    /**
+     * Block size
+     */
     protected static final int BLOCK = 55;
+
+    /**
+     * Map size
+     */
     protected static final int MAPSIZE = 6;
+
+    /**
+     * Player width
+     */
     protected static final int PLAYER_W = BLOCK * 2/3;
+
+    /**
+     * Player heigh
+     */
     protected static final int PLAYER_H = BLOCK;
+
+    /**
+     * Target width
+     */
     protected static final int TARGET_W = BLOCK * 2/3;
     
+    /**
+     * map
+     */
     protected int [][] map = new int[MAPSIZE][MAPSIZE];
     private int currentStage;
+
+    /**
+     * box
+     */
     protected List<DynamicItem> box = new LinkedList();
     private List<DynamicItem> targets = new LinkedList();
+
+    /**
+     * player
+     */
     protected DynamicItem player;
     
     private Theme theme;

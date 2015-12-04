@@ -20,15 +20,55 @@ import javax.imageio.ImageIO;
  * @author Zhonghua Qin
  */
 public class Theme {
+
+    /**
+     *name
+     */
     protected String name = "Default";
+
+    /**
+     * playerUpImages
+     */
     protected List<Image> playerUpImages = new ArrayList<>();
+
+    /**
+     * playerDownImages
+     */
     protected List<Image> playerDownImages = new ArrayList<>();
+
+    /**
+     * playerLeftImages
+     */
     protected List<Image> playerLeftImages = new ArrayList<>();
+
+    /**
+     * playerRightImages
+     */
     protected List<Image> playerRightImages = new ArrayList<>();
+
+    /**
+     * wallImages
+     */
     protected List<Image> wallImages = new ArrayList<>();
+
+    /**
+     * floorImages
+     */
     protected List<Image> floorImages = new ArrayList<>();
+
+    /**
+     * boxImages
+     */
     protected List<Image> boxImages = new ArrayList<>();
+
+    /**
+     * boxCompletedImages
+     */
     protected List<Image> boxCompletedImages = new ArrayList<>();
+
+    /**
+     * targetImages
+     */
     protected List<Image> targetImages = new ArrayList<>();
     /**
      * themes
