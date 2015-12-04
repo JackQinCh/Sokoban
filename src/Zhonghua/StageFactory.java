@@ -182,6 +182,10 @@ public final class StageFactory {
 	stage16, stage17, stage18, stage19, stage20
     };
 
+    /**
+     * get stages data
+     * @return int[][][]
+     */
     public static int[][][] getStages() {
 	return stages;
     }

@@ -11,6 +11,7 @@ package Zhonghua;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JApplet;
@@ -20,15 +21,14 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 /**
- * Sokoban Applet
+ * Sokoban Applet extends JApplet
  * @author Zhonghua Qin
  */
-public class SokobanApplet extends JApplet implements KeyListener{
+public class SokobanApplet extends JApplet{
 
     // Variables declaration - do not modify                     
     private GamePanel gamePanel;
     // End of variables declaration 
-    
     
     /**
      * Initialization method that will be called after the applet is loaded into the browser.
@@ -40,7 +40,13 @@ public class SokobanApplet extends JApplet implements KeyListener{
 	gamePanel = new GamePanel();
 	add(gamePanel, BorderLayout.CENTER);
 	
-	addKeyListener(this);
+	addKeyListener(new KeyAdapter() {   
+	    @Override
+	    public void keyPressed(KeyEvent e) {
+		gamePanel.keyPressed(e);
+	    }
+	    
+	});
 	setFocusable(true);
 	
     }
@@ -110,16 +116,4 @@ public class SokobanApplet extends JApplet implements KeyListener{
 	return menu;
     }
     
-    @Override
-    public void keyTyped(KeyEvent e) {
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-	gamePanel.keyPressed(e);
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-    }
 }

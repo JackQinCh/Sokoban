@@ -25,14 +25,32 @@ public class DynamicItem {
     private int wide;
     private int heigh;
 
+    /**
+     * get wide
+     * @return 
+     */
     public int getWide() {
 	return wide;
     }
 
+    /**
+     * get heigh
+     * @return 
+     */
     public int getHeigh() {
 	return heigh;
     }
 
+    /**
+     * Constructor
+     * @param image Image
+     * @param x int
+     * @param y int
+     * @param dX int
+     * @param dY int
+     * @param wide int
+     * @param heigh  int
+     */
     public DynamicItem(Image image, int x, int y, int dX, int dY, int wide, int heigh) {
 	this.image = image;
 	this.x = x;

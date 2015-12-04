@@ -27,6 +27,10 @@ public class SQLManager {
     private SQLManager(){
     }
     
+    /**
+     * save game into SQL
+     * @param map int[][]
+     */
     public static void save(int[][] map){
 	Connection connection = null;
 	Statement statement = null;
@@ -54,6 +58,10 @@ public class SQLManager {
 	
     }
     
+    /**
+     * load game from SQL
+     * @return int[][]
+     */
     public static int[][] load(){
 	int[][] map = new int[GameController.MAPSIZE][GameController.MAPSIZE];
 	

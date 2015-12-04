@@ -25,12 +25,9 @@ public class GameFrame extends javax.swing.JFrame {
     public GameFrame() {
         initComponents();
 	int numOfThemes = Theme.themes.length;
-	ActionListener listener = new ActionListener() {
-	    @Override
-	    public void actionPerformed(ActionEvent e) {
-		String command = e.getActionCommand();
-		((GamePanel)gamePanel).setTheme(Integer.valueOf(command));
-	    }
+	ActionListener listener = (ActionEvent e) -> {
+	    String command = e.getActionCommand();
+	    ((GamePanel)gamePanel).setTheme(Integer.valueOf(command));
 	};
 	
 	for (int i = 0; i < numOfThemes; i++) {
@@ -218,6 +215,7 @@ public class GameFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
+     * main
      * @param args the command line arguments
      */
     public static void main(String args[]) {

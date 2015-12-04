@@ -56,6 +56,10 @@ public class GameController {
     
     private Theme theme;
 
+    /**
+     * Constructor
+     * @param gamePanel GamePanel
+     */
     public GameController(GamePanel gamePanel) {
 	this.gamePanel = gamePanel;
 	
@@ -133,6 +137,10 @@ public class GameController {
 	isPlaying = false;
     }
     
+    /**
+     * draw method
+     * @param g2d Graphics2D
+     */
     public void draw(Graphics2D g2d){
 	g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION,RenderingHints.VALUE_INTERPOLATION_BILINEAR);
 	
@@ -169,6 +177,10 @@ public class GameController {
 	}
     }
 
+    /**
+     * Get current stage
+     * @return currentStage
+     */
     public int getCurrentStage() {
 	return currentStage;
     }
@@ -227,6 +239,7 @@ public class GameController {
     }
     private Image congratulationsImage;
     private boolean isFinished = false;
+    
     private void checkFinish(){
 	int boxnum = 0;
 	int targetnum = 0;
@@ -272,6 +285,10 @@ public class GameController {
 	}
     }
     
+    /**
+     * move when key pressed
+     * @param direction int
+     */
     public void move(int direction){
 	if (isPlaying || isFinished) {
 	    return;
@@ -400,11 +417,17 @@ public class GameController {
 	}
     }
     
-    protected void newGame(){
+    /**
+     * new game
+     */
+    void newGame(){
 	stopAnimation();
 	initGame(true);
     }
 
+    /**
+     * next stage
+     */
     void nextStage() {
 	if (currentStage+1 < StageFactory.getStages().length) {
 	    currentStage ++;
@@ -413,6 +436,9 @@ public class GameController {
 	    newGame();
     }
 
+    /**
+     * previous stage
+     */
     void backStage() {
 	if (currentStage > 0) {
 	    currentStage --;
@@ -421,15 +447,25 @@ public class GameController {
 	    newGame();
     }
 
+    /**
+     * set stage
+     * @param n 
+     */
     void setStage(int n) {
 	currentStage = n-1;
 	newGame();
     }
 
+    /**
+     * save game
+     */
     void saveGame() {
 	SQLManager.save(map);
     }
 
+    /**
+     * load game
+     */
     void loadGame() {
 	
 	int[][] loadMap = SQLManager.load();
@@ -446,6 +482,10 @@ public class GameController {
 	}
     }
 
+    /**
+     * set theme
+     * @param t int 
+     */
     void setTheme(int t) {
 	theme = Theme.newTheme(t);
     }

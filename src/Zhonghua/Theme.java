@@ -30,7 +30,9 @@ public class Theme {
     protected List<Image> boxImages = new ArrayList<>();
     protected List<Image> boxCompletedImages = new ArrayList<>();
     protected List<Image> targetImages = new ArrayList<>();
-    
+    /**
+     * themes
+     */
     public static final Theme[] themes = {
 	new Theme(),
 	new SnowTheme(),
@@ -38,59 +40,106 @@ public class Theme {
 	new GreenTheme()
     };
     
-    static enum Themes{
-	DEFAULT
-    }
-    
+    /**
+     * new theme with index
+     * @param t index
+     * @return Theme
+     */
     public static Theme newTheme(int t){
 	return themes[t];
     }
     
+    /**
+     * Get name
+     * @return 
+     */
     public String getName() {
 	return name;
     }
 
+    /**
+     * Get wall images
+     * @return List of Image
+     */
     public List<Image> getWallImages() {
 	return wallImages;
     }
 
+    /**
+     * Get floor images
+     * @return List of Image
+     */
     public List<Image> getFloorImages() {
 	return floorImages;
     }
-
+    
+    /**
+     * Get box images
+     * @return List of Image
+     */
     public List<Image> getBoxImages() {
 	return boxImages;
     }
+    /**
+     * Get completed box images
+     * @return List of Images
+     */
     public List<Image> getBoxCompletedImages() {
 	return boxCompletedImages;
     }
 
+    /**
+     * Get target Images
+     * @return List of Image
+     */
     public List<Image> getTargetImages() {
 	return targetImages;
     }
 
+    /**
+     * Get player up images
+     * @return List of image
+     */
     public List<Image> getPlayerUpImages() {
 	return playerUpImages;
     }
 
+    /**
+     * Get player down images
+     * @return List of image
+     */
     public List<Image> getPlayerDownImages() {
 	return playerDownImages;
     }
 
+    /**
+     * Get player left images
+     * @return List of image
+     */
     public List<Image> getPlayerLeftImages() {
 	return playerLeftImages;
     }
 
+    /**
+     * Get player right images
+     * @return List of image
+     */
     public List<Image> getPlayerRightImages() {
 	return playerRightImages;
     }
 
+    /**
+     * Constructor
+     */
     protected Theme() {
 	initItems();
 	initPlayer();
 	
     }
 
+    /**
+     * Initial Items res
+     */
     protected void initItems() {
 	URL imgURL = getClass().getResource("R/images/Wall_Brown.png");
 	try{
@@ -124,6 +173,9 @@ public class Theme {
 	}
     }
 
+    /**
+     * Initial player res
+     */
     protected void initPlayer() {
 	URL imgURL;
 	//Player Up
