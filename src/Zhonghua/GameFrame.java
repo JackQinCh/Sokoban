@@ -14,7 +14,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Sokoban game frame.
  * @author Zhonghua Qin
  */
 public class GameFrame extends javax.swing.JFrame {

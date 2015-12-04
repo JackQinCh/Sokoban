@@ -13,7 +13,7 @@ import java.net.URL;
 import javax.imageio.ImageIO;
 
 /**
- *
+ * Green Theme
  * @author Zhonghua Qin
  */
 public class GreenTheme extends Theme{

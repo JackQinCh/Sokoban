@@ -13,7 +13,7 @@ import java.net.URL;
 import javax.imageio.ImageIO;
 
 /**
- *
+ * Castle Theme
  * @author Zhonghua Qin
  */
 public class CastleTheme extends Theme{

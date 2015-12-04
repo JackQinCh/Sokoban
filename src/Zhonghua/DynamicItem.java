@@ -11,7 +11,7 @@ package Zhonghua;
 import java.awt.Image;
 
 /**
- *
+ * Sokoban map item model
  * @author Zhonghua Qin
  */
 public class DynamicItem {

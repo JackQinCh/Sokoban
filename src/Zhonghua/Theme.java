@@ -16,7 +16,7 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 /**
- *
+ * Theme class and theme static factory
  * @author Zhonghua Qin
  */
 public class Theme {

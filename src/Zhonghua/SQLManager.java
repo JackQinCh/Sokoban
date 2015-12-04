@@ -15,7 +15,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- *
+ * SQL manager connect to NJIT MySQL server.
  * @author Zhonghua Qin
  */
 public class SQLManager {

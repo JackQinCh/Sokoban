@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 import javax.swing.JPanel;
 
 /**
- *
+ * Sokoban game panel
  * @author Zhonghua Qin
  */
 public class GamePanel extends JPanel {

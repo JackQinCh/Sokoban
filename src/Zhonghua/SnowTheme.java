@@ -13,7 +13,7 @@ import java.net.URL;
 import javax.imageio.ImageIO;
 
 /**
- *
+ * Snow Theme
  * @author Zhonghua Qin
  */
 public class SnowTheme extends Theme{

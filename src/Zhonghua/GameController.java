@@ -15,6 +15,7 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -23,9 +24,11 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.imageio.ImageIO;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
 
 /**
- *
+ * Sokoban game controller
  * @author Zhonghua Qin
  */
 public class GameController {
@@ -66,6 +69,7 @@ public class GameController {
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
+	
     }
 
     private void initGame(boolean withStage) {
@@ -172,7 +176,7 @@ public class GameController {
     private boolean isPlaying = false;
     private Timer timer;
     private void playAnimation(DynamicItem item, List<Image> frames, Point distancePoint, int cycle, int time){
-	if(item == null || frames.size() == 0)
+	if(item == null || frames.isEmpty())
 	    return;
 	isPlaying = true;
 	timer = new Timer();
@@ -198,11 +202,13 @@ public class GameController {
 	int startY = item.dY;
 	double spanX = ((double)distancePoint.x)/(allFrames.size()-1);
 	double spanY = ((double)distancePoint.y)/(allFrames.size()-1);
-	
+	System.out.println("playAnimation");
 	timer.schedule(new TimerTask() {
 	    int n = 0;
 	    @Override
-	    public void run() {
+	    synchronized public void run() {
+//		System.out.println("Playing animation");
+		
 		item.image = allFrames.get(n);
 		item.dX = startX + (int)(spanX*n);
 		item.dY = startY + (int)(spanY*n);
@@ -240,7 +246,15 @@ public class GameController {
     
     private void finishedGame() {
 	isFinished = true;
-	
+	try{
+	    URL auURL = getClass().getResource("R/sounds/wa.wav");
+	    AudioStream as = new AudioStream(auURL.openStream());
+	    AudioPlayer.player.start(as);
+	} catch (FileNotFoundException e) {
+	    e.printStackTrace();
+	} catch (IOException e) {
+	    e.printStackTrace();
+	}
 	Timer timer = new Timer();
 	timer.schedule(new TimerTask() {
 	    @Override
@@ -309,6 +323,15 @@ public class GameController {
 	    //Move
 	    playAnimation(player, framesImages, 
 		    new Point((newX - player.x)*BLOCK, (newY - player.y)*BLOCK), 2, 1000);
+	    try{
+		URL auURL = getClass().getResource("R/sounds/walk.wav");
+		AudioStream as = new AudioStream(auURL.openStream());
+		AudioPlayer.player.start(as);
+	    } catch (FileNotFoundException e) {
+		e.printStackTrace();
+	    } catch (IOException e) {
+		e.printStackTrace();
+	    }
 	    player.tmpX = newX;
             player.tmpY = newY;
 	    System.out.println("Player X:"+player.x+", Y:"+player.y);
@@ -326,16 +349,55 @@ public class GameController {
 		//Move
 		playAnimation(boxT, theme.getBoxImages(), 
 		    new Point((crossX - boxT.x)*BLOCK, (crossY - boxT.y)*BLOCK), 5*2, 1000);
+		
 		boxT.tmpX = crossX;
 		boxT.tmpY = crossY;
 		playAnimation(player, framesImages, 
 		    new Point((newX - player.x)*BLOCK, (newY - player.y)*BLOCK), 2, 1000);
+		try{
+		    URL auURL = getClass().getResource("R/sounds/walk.wav");
+		    AudioStream as = new AudioStream(auURL.openStream());
+		    AudioPlayer.player.start(as);
+		} catch (FileNotFoundException e) {
+		    e.printStackTrace();
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
+		try{
+		    URL auURL = getClass().getResource("R/sounds/pushbox.wav");
+		    AudioStream as = new AudioStream(auURL.openStream());
+		    AudioPlayer.player.start(as);
+		} catch (FileNotFoundException e) {
+		    e.printStackTrace();
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
                 player.tmpX = newX;
                 player.tmpY = newY;
 		System.out.println("Player X:"+player.x+", Y:"+player.y);
 		System.out.println("Box X:"+boxT.x+", Y:"+boxT.y);
-            }
-        }
+            }else{
+		try{
+		    URL auURL = getClass().getResource("R/sounds/hitbox.wav");
+		    AudioStream as = new AudioStream(auURL.openStream());
+		    AudioPlayer.player.start(as);
+		} catch (FileNotFoundException e) {
+		    e.printStackTrace();
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
+	    }
+        }else{
+	    try{
+		URL auURL = getClass().getResource("R/sounds/hitwall.wav");
+		AudioStream as = new AudioStream(auURL.openStream());
+		AudioPlayer.player.start(as);
+	    } catch (FileNotFoundException e) {
+		e.printStackTrace();
+	    } catch (IOException e) {
+		e.printStackTrace();
+	    }
+	}
     }
     
     protected void newGame(){

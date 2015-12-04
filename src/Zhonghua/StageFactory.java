@@ -9,7 +9,7 @@
 package Zhonghua;
 
 /**
- *
+ * Stage data factory.
  * @author Zhonghua Qin
  */
 public final class StageFactory {
